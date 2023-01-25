@@ -11,58 +11,58 @@ import Dropdown from "../../components/Dropdown/Dropdown";
 function Fiche() {
     /* Récupère la bonne fiche */
     const id = useParams();
-    const ficheLogement = ListeLogements.find(logement => logement.id === id.id);
+    const logementFiche = ListeLogements.find(logement => logement.id === id.id);
 
     /* Tags */
-    const tagsLogement = ficheLogement?.tags.map((tags, index) => {
+    const tagsLogement = logementFiche?.tags.map((tags, index) => {
         return <Tag key={index} nom={tags} />
     });
 
     /* Notes */
-    let noteLogement = [];
+    let logementNote = [];
     let etoileComplete = true;
     for (let index = 0; index < 5; index++) {
-        if(index === parseInt(ficheLogement?.rating)) {
+        if(index === parseInt(logementFiche?.rating)) {
             etoileComplete = false;
         }
         if(etoileComplete === true) {
-            noteLogement.push(<img key={index} className="etoile" src={Etoile} alt={`${ficheLogement?.rating}/5`}/>)
+            logementNote.push(<img key={index} className="etoile" src={Etoile} alt={`${logementFiche?.rating}/5`}/>)
         } else {
-            noteLogement.push(<img key={index} className="etoile" src={EtoileVide} alt={`${ficheLogement?.rating}/5`}/>)
+            logementNote.push(<img key={index} className="etoile" src={EtoileVide} alt={`${logementFiche?.rating}/5`}/>)
         }
     }
 
     /* Équipements */
-    const equipementsLogement = ficheLogement?.equipments.map((equipment, index) => {
+    const equipementsLogement = logementFiche?.equipments.map((equipment, index) => {
         return <li key={index}>{equipment}</li>
     })
 
     return(
         <>
             {
-                ficheLogement ? (
+                logementFiche ? (
                     <div className="Fiche">
-                        <Carrousel images={ficheLogement?.pictures}/>
+                        <Carrousel images={logementFiche?.pictures}/>
                         <div className="logements-propietaire">
                             <div className="information-logements">
-                                <span className="titre-logement">{ficheLogement?.title}</span>
-                                <span className="endroit-logement">{ficheLogement?.location}</span>
+                                <span className="titre-logement">{logementFiche?.title}</span>
+                                <span className="endroit-logement">{logementFiche?.location}</span>
                                 <div className="tags">
                                     {tagsLogement}
                                 </div>
                             </div>
                             <div className="proprietaire-note">
                                 <div className="information-propietaire">
-                                    <span className="nom-proprietaire">{ficheLogement?.host.name}</span>
-                                    <img className="photo-propietaire" src={ficheLogement?.host.picture} alt="Propriétaire"/>
+                                    <span className="nom-proprietaire">{logementFiche?.host.name}</span>
+                                    <img className="photo-propietaire" src={logementFiche?.host.picture} alt="Propriétaire"/>
                                 </div>
                                 <div className="note">
-                                    {noteLogement}
+                                    {logementNote}
                                 </div>
                             </div>
                         </div>
                         <div className="description-equipements">
-                            <Dropdown titre="Description" description={ficheLogement?.description}/>
+                            <Dropdown titre="Description" description={logementFiche?.description}/>
                             <Dropdown titre="Équipements" description={equipementsLogement}/>
                         </div>
                     </div>

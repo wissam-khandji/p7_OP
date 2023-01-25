@@ -3,42 +3,43 @@ import "./Carrousel.css";
 import fleche from "../../assets/img/Components/Carrousel/Fleche.png";
 
 function Carrousel({images}) {
-    /* Crée un Hook d'état */
-    let [imgAfficher, changerImg] = useState(0);
-    let nombreImg = images.length;
+    let [displayedImg, changeImg] = useState(0);
+    let imgNumber = images.length;
 
-    const imgPrecedente = () => {
-        if(imgAfficher === 0) {
-            changerImg(nombreImg - 1);
+    //Permet de retourner à l'image précédente, même si c'est la première.
+    const previousImg = () => {
+        if(displayedImg === 0) {
+            changeImg(imgNumber - 1);
         } else {
-            changerImg(imgAfficher - 1);
+            changeImg(displayedImg - 1);
         }
-        return(changerImg);
+        return(changeImg);
     };  
 
-    const imgSuivante = () => {
-        if(imgAfficher === nombreImg - 1) {
-            changerImg(nombreImg = 0);
+    //Permet de retourner à l'image suivante, même si c'est la derniere.
+    const nextImg = () => {
+        if(displayedImg === imgNumber - 1) {
+            changeImg(imgNumber = 0);
         } else {
-            changerImg(imgAfficher + 1);
+            changeImg(displayedImg + 1);
         }
-        return(changerImg);
+        return(changeImg);
     };
 
     return(
         <div className="carrousel">
             {
-                nombreImg > 1 && <img className="fleche fleche-gauche" src={fleche} alt="Contenu précedént" onClick={imgPrecedente}/>
+                imgNumber > 1 && <img className="fleche fleche-gauche" src={fleche} alt="Contenu précedént" onClick={previousImg}/>
             }
             {
                 images.map((image, index) => {
                     return(
-                        <img key={index} className={index === imgAfficher ? 'carrousel-img actif' : 'carrousel-img'} src={image} alt="Logement"/>
+                        <img key={index} className={index === displayedImg ? 'carrousel-img actif' : 'carrousel-img'} src={image} alt="Logement"/>
                     )
                 })
             }
             {
-                nombreImg > 1 && <img className="fleche fleche-droite" src={fleche} alt="Contenu suivant" onClick={imgSuivante}/>
+                imgNumber > 1 && <img className="fleche fleche-droite" src={fleche} alt="Contenu suivant" onClick={nextImg}/>
             }
         </div>
     );
