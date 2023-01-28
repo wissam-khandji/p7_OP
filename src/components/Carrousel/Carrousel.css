@@ -21,6 +21,15 @@
     top: 50%;
     transform: translateY(-50%) rotate(180deg);
 }
+.number-container.center {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 1em;
+    color: white;
+}
 .fleche-droite {
     margin-right: 25px;
     right: 0;

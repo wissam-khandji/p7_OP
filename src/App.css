@@ -5,9 +5,15 @@ body {
   padding: 0;
 }
 
-/* Polices */
+/* Import de montserrat placé dans public*/
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../public/police/Montserrat-Regular.ttf') format('truetype');
+}
+
+/* ajout de la police a toute l'application*/
 * {
-  font-family: "Montserrat";
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* Contenu */
